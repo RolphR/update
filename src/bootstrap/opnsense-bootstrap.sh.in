@@ -230,5 +230,9 @@ if [ -z "${DO_BARE}" ]; then
 	unset SSL_CA_CERT_FILE
 
 	opnsense-update ${DO_VERBOSE} -bkf
-	reboot
+	if [ -f "config.xml" ]; then
+		mkdir -p /conf
+		cp config.xml /conf/config.xml
+	fi
+	shutdown -p now
 fi
